@@ -24,7 +24,7 @@ RUN curl -L ${ANDROID_SDK_URL} | tar xz -C /usr/local
 # SDK + Tools + platformtools
 ENV ANDROID_BUILD_TOOLS_VERSION 23.0.1
 ENV ANDROID_SDK_VERSION 23
-ENV ANDROID_SDK_COMPONENTS platform-tools,build-tools-${ANDROID_BUILD_TOOLS_VERSION},android-${ANDROID_SDK_VERSION},extra-android-support
+ENV ANDROID_SDK_COMPONENTS platform-tools,build-tools-${ANDROID_BUILD_TOOLS_VERSION},android-${ANDROID_SDK_VERSION},extra-android-support,extra-android-m2repository
 RUN  ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | ${ANDROID_HOME}/tools/android update sdk --no-ui --all --filter "${ANDROID_SDK_COMPONENTS}"
 
 # Path
