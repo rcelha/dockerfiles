@@ -1,5 +1,8 @@
 FROM rcelha/android-sdk
 
+# deps
+RUN apt-get update && apt-get install -y xterm;
+
 # MOTOROLA DEVICE
 RUN echo SUBSYSTEM=="usb", ATTR{idVendor}=="22b8", MODE="0666", GROUP="plugdev" | tee /etc/udev/rules.d/51-android-usb.rules
 
