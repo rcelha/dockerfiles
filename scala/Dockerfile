@@ -11,6 +11,9 @@ RUN set -ex ;\
     tar -xvzf scala-2.11.8.tgz ;\
     rm scala-2.11.8.tgz;
 
-WORKDIR /scala-2.11.8/bin
+ENV SCALA_HOME /scala-2.11.8
+ENV PATH $PATH:$SCALA_HOME/bin
 
-CMD ["./scala"]
+WORKDIR /code
+VOLUME ['/code']
+CMD ["scala"]
