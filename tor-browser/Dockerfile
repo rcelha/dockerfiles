@@ -18,7 +18,7 @@ RUN useradd --create-home --home-dir $HOME user \
 
 ENV LANG C.UTF-8
 
-ENV TOR_VERSION 5.5.5
+ENV TOR_VERSION 6.0.1
 ENV TOR_FINGERPRINT 0x4E2C6E8793298290
 
 # download tor and check signature
@@ -33,6 +33,7 @@ RUN cd /tmp \
     && rm -rf tor-browser* \
     && rm -rf ~/.gnupg
 
+RUN apt-get update && apt-get install -y gstreamer1.0-libav;
 
 # good fonts
 # COPY local.conf /etc/fonts/local.conf
