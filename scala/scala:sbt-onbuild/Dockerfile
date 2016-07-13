@@ -1,4 +1,4 @@
-FROM rcelha:alpine
+FROM rcelha/scala:sbt
 
 ONBUILD COPY . /code
 WORKDIR /code
