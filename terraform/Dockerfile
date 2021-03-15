@@ -1,14 +1,24 @@
-FROM buildpack-deps:jessie-curl
+# Usage:
+#   docker run -it --rm
+#          -v ${PWD}:/code
+#          rcelha/terraform
+#
 
-WORKDIR /terraform
-RUN set -ex ;\
-    apt update; \
-    apt install -y unzip; \
-    curl -o terraform.zip https://releases.hashicorp.com/terraform/0.6.16/terraform_0.6.16_linux_amd64.zip; \
-    unzip -x terraform.zip; \
-    rm terraform.zip;
+FROM debian:buster-slim
 
-ENV PATH /terraform:$PATH
+RUN apt-get update && \
+    apt-get install -y curl unzip && \
+    rm -rf /var/lib/apt/lists/*
+
+ENV TERRAFORM_VERSION 0.6.16
+ENV TERRAFORM_URL https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+WORKDIR /opt/terraform
+RUN curl -o terraform.zip ${TERRAFORM_URL} && \
+    ls -lha && \
+    unzip -x terraform.zip && \
+    rm terraform.zip
+
+ENV PATH /opt/terraform:$PATH
 
 WORKDIR /code
 VOLUME /code
