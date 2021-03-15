@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -euo pipefail
+
+NAME=$1
+shift
+
+CMD=$(sed -n '/docker run/,/^#$/p' "$NAME/Dockerfile" | tr '\n#' ' ')
+
+echo $CMD $@
+eval "$CMD $@"
